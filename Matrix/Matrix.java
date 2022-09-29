@@ -1,17 +1,14 @@
 package Matrix;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.io.*;
-
 public class Matrix {
-    private int row, col;
-    private double[][] data = null;
+    public int row, col;
+    public double[][] data = null;
 
-    // create empty matrix
-    public void emptyMatrix() {
-        this.row = 0;
-        this.col = 0;
+    // constructor
+    public Matrix(int row, int col) {
+        this.row = row;
+        this.col = col;
+        this.data = new double[row][col];
     }
 
     // create and fill in matrix 
