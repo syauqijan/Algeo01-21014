@@ -4,7 +4,7 @@ public class Menu {
     public static void mainMenu() {
         System.out.println("");
         System.out.println("    SELAMAT DATANG DI MATRIX CALCULATOR     ");
-        System.out.println("                    MENU                    ");
+        System.out.println("");
         System.out.println("1. Sistem Persamaan Linier");
         System.out.println("2. Determinan");
         System.out.println("3. Matriks Balikan");

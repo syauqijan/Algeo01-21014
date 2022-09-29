@@ -14,15 +14,15 @@ public class Main {
             Menu.mainMenu();
             pilihan = input.nextInt();
 
-            if (pilihan == 5) {Interpolation();}
+            if (pilihan == 4) {Interpolation();}
+            else if (pilihan == 5) {Bicubic();}
             else if (pilihan == 7) {
                 System.out.println("    Terima kasih telah menggunakan Matrix Calculator    ");
             }
-            else {System.out.println("Operasi " + pilihan + " tidak ditemukan");}
+            else {System.out.println("Program " + pilihan + " tidak ditemukan");}
         } while (pilihan != 7);
     }
     
-
     public static void Interpolation() {
         Matrix m;
         double x;
@@ -33,5 +33,12 @@ public class Main {
 
         x = Interpolasi.inputX();
         Interpolasi.solveInterpolasi(m, x);
+    }
+
+    public static void Bicubic() {
+        Matrix m;
+        
+        System.out.println("\nInput matriks: ");
+        m = Bikubik.inputBicubic();
     }
 }

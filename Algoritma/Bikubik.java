@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 import Matrix.Matrix;
 
-public class Bicubic {
+public class Bikubik {
     
     public static Matrix inputBicubic() {
 

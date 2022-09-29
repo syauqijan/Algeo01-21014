@@ -54,10 +54,23 @@ public class Matrix {
     public void printMatrix() {
         for (int i = 0; i < this.row; i++) {
             for (int j = 0; j < this.col; j++) {
-                System.out.print(this.data[i][j]);
+                System.out.printf("%.2f", this.data[i][j]);
                 System.out.print(" ");
             }
             System.out.println("");
+        }
+    }
+
+    public static void printSPLSolution(double[] result) {
+        for (int i=0; i<result.length; i++) {
+            System.out.printf("x%d = %.4f\n",i+1, result[i]);
+        }
+    }
+    
+    
+    public static void printSPLSolution(String[] result) {
+        for (int i=0; i<result.length; i++) {
+            System.out.printf("x%d = %s\n", i+1, result[i]);
         }
     }
 
