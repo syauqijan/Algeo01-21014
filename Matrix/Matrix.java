@@ -4,16 +4,6 @@ public class Matrix {
     public int row, col;
     public double[][] data = null;
 
-<<<<<<< HEAD
-    // create empty matrix
-    public void emptyMatrix() {
-        this.row = 0;
-        this.col = 0;
-    }
-
-    // create and fill in matrix 
-    public  void createMatrix(int row, int col) {
-=======
     // constructor
     public Matrix(int row, int col) {
         this.row = row;
@@ -23,7 +13,6 @@ public class Matrix {
 
     // create and fill in matrix 
     public void createMatrix(int row, int col) {
->>>>>>> a5c200e45b4e459160cdb57e144796071bc69dc7
         this.row = row;
         this.col = col;
         this.data = new double[row][col];
@@ -106,12 +95,7 @@ public class Matrix {
     }
 
     // check if matrix is square
-<<<<<<< HEAD
-    public boolean isSquare(Matrix m) {
-        return (m.countRow() ==  m.countCol());
-=======
     public boolean isSquare() {
         return (this.row ==  this.col);
->>>>>>> a5c200e45b4e459160cdb57e144796071bc69dc7
     }
 }

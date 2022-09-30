@@ -2,7 +2,7 @@ package Algoritma;
 
 import Matrix.Matrix;
 
-public class GaussElimination {
+public class Gauss {
     public static int swapCount;            
     public static double constant;          
 
