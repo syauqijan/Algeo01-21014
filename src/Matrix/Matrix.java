@@ -1,9 +1,455 @@
 package Matrix;
 
-public class Matrix {
+import java.util.Scanner;
 
-    // KAMUS LOKAL
-    private int rowEff, colEff;
-    private double[][] mem;
+public class Matrix {
+    public int row;
+    public int col;
+    private double[][] data = null;
+
+    // create empty matrix
+    public void emptyMatrix() {
+        this.row = 0;
+        this.col = 0;
+    }
+
+    // create and fill in matrix 
+    public void createMatrix(int row, int col) {
+        this.row = row;
+        this.col = col;
+        this.data = new double[row][col];
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                pELMT(0, i, j);
+            }
+        }
+    }
+
+    public void ScanMatrix() {
+        try (Scanner scan = new Scanner(System.in)) {
+            System.out.print("Masukkan jumlah baris: ");
+            int m = scan.nextInt();
+            System.out.print("Masukkan jumlah kolom: ");
+            int n = scan.nextInt();
+            this.createMatrix(m, n);
+            for (int i = 0; i < m; i++) {
+                for (int j = 0; j < n; j++) {
+                    double x = scan.nextDouble();
+                    pELMT(x, i, j);
+                }
+            }
+        }
+        
+    }
+
+    public void ScanMatrixPersegi() {
+        try (Scanner scan = new Scanner(System.in)) {
+            System.out.print("Masukkan ukuran matriks: ");
+            int n = scan.nextInt();
+            this.createMatrix(n, n);
+            for (int i = 0; i < n; i++) {
+                for (int j = 0; j < n; j++) {
+                    double x = scan.nextDouble();
+                    pELMT(x, i, j);
+                }
+            }
+        }
+    }
+
+    public void ScanMatrixB() {
+        try (Scanner scan = new Scanner(System.in)) {
+            System.out.print("Masukkan jumlah kolom: ");
+            int n = scan.nextInt();
+            this.createMatrix(1, n);
+            for (int i = 0; i < n; i++) {
+                double x = scan.nextDouble();
+                pELMT(x, 0, i);
+            }
+        }
+    }
+
+    // create identity matrix
+    public void identityMatrix(int x) {
+        this.row = x;
+        this.col = x;
+        this.data = new double [x][x];
+        for (int i = 0; i < x; i++) {
+            for (int j = 0; j < x; j++) {
+                if (i == j) {
+                    pELMT(1, i, j);
+                } else {
+                    pELMT(0, i, j);
+                }
+            }
+        }
+    }
+
+    // create copy matrix
+    public void copyMatrix (Matrix m) {
+        this.row = m.countRow();
+        this.col = m.countCol();
+        for (int i = 0; i < this.row; i++) {
+            for (int j = 0; j < this.col; j++) {
+                pELMT(m.ELMT(i,j), i, j);
+            }
+        }
+    }
+
+    // display matrix
+    public void printMatrix() {
+        for (int i = 0; i < this.row; i++) {
+            for (int j = 0; j < this.col; j++) {
+                System.out.println(this.data[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    // print SPL
+    public void printSPL() {
+        System.out.println("Solusi SPL:");
+        for (int i = 0; i < this.countRow(); i++) {
+            System.out.println("x"+(i+1)+" = " + this.data[i][0]);
+        }
+    }
+
+    // return element in matrix
+    public double ELMT(int i, int j) {
+        return this.data[i][j];
+    }
+
+    // return number of rows
+    public int countRow() {
+        return this.row;
+    }
+
+    // return number of columns
+    public int countCol() {
+        return this.col;
+    }
+
+    // set element
+    public void pELMT(double x, int row, int col) {
+        this.data[row][col] = x;
+    }
+
+    // check if matrix is square
+    public boolean isSquare() {
+        return (this.row ==  this.col);
+    }
+
+    // mereturn matrix tanpa kolom col
+    public Matrix deleteCol(int col) {
+        Matrix res = new Matrix();
+        res.createMatrix(this.row, this.col-1);
+        int i, j;
+        for (i=0; i<this.row; i++) {
+            for (j=0; j<col; j++) {
+                res.pELMT(this.ELMT(i, j), i, j);
+            }
+            for (j=col+1; j<this.col; j++) {
+                res.pELMT(this.ELMT(i, j), i, j-1);
+            }
+        }
+        return res;
+    }
+
+    // mereturn matrix dari kolom col
+    public Matrix getCol(int col) {
+        Matrix m = new Matrix();
+        m.createMatrix(this.row, 1);
+        for (int i = 0; i < this.row; i++) {
+            m.pELMT(this.ELMT(i, col), i, 0);
+        }
+        return m;
+    }
+
+    // mereturn penggantian kolom i dengan matrix m, prekondisi: matrix m berkolom 1
+    public void changeCol(int i, Matrix m) {
+        for (int j = 0; j < this.row; j++) {
+            this.pELMT(m.ELMT(j, 0), j, i);
+        }
+    }
+
+    public void MultiplySkalar(double x) {
+        for (int i = 0; i < this.row; i++) {
+            for (int j = 0; j < this.col; j++) {
+                this.data[i][j] *= x;
+            }
+        }
+    }
+
+    // mengalikan matrix dengan matrix m
+    public void Multiply(Matrix m) {
+        if (this.col == m.row) {
+            Matrix temp = new Matrix();
+            temp.createMatrix(this.row, m.countCol());
+            for (int i = 0; i < this.row; i++) {
+                for (int j = 0; j < m.countCol(); j++) {
+                    double sum = 0;
+                    for (int k = 0; k < this.col; k++) {
+                        sum += this.data[i][k] * m.ELMT(k, j);
+                    }
+                    temp.pELMT(sum, i, j);
+                }
+            }
+            this.copyMatrix(temp);
+        } else {
+            System.out.println("Matrix tidak dapat dikalikan");
+        }
+    }
+
+    // menghitung determinan matrix
+    public double Determinan() {
+        // KAMUS LOKAL
+        double det = 0;
+        int i, j, k;
+        Matrix temp;
+        // ALGORITMA
+        if (this.isSquare()) {
+            if (this.row == 1) {
+                return this.ELMT(0,0);
+            } else if (this.row == 2) {
+                return (this.ELMT(0,0) * this.ELMT(1,1)) - (this.ELMT(0,1) * this.ELMT(1,0));
+            } else {
+                det = 0;
+                for (i = 0; i < this.row; i++) {
+                    temp = new Matrix();
+                    temp.createMatrix(this.row - 1, this.col - 1);
+                    for (j = 1; j < this.row; j++) {
+                        for (k = 0; k < this.col; k++) {
+                            if (k < i) {
+                                temp.pELMT(this.ELMT(j,k), j - 1, k);
+                            } else if (k > i) {
+                                temp.pELMT(this.ELMT(j,k), j - 1, k - 1);
+                            }
+                        }
+                    }
+                    det += Math.pow(-1, i) * this.ELMT(0,i) * temp.Determinan();
+                }
+                return det;
+            }
+        } else {
+            System.out.println("Matriks bukan persegi");
+            return 0;
+        }
+    } 
+
+    // mengetahui matrix adjoin
+    public Matrix Adjoin() {
+        // KAMUS LOKAL
+        Matrix temp = new Matrix();
+        Matrix adj = new Matrix();
+        int i, j, k, l;
+        // ALGORITMA
+        if (this.isSquare()) {
+            adj.createMatrix(this.row, this.col);
+            for (i = 0; i < this.row; i++) {
+                for (j = 0; j < this.col; j++) {
+                    temp.createMatrix(this.row - 1, this.col - 1);
+                    for (k = 0; k < this.row; k++) {
+                        for (l = 0; l < this.col; l++) {
+                            if (k < i && l < j) {
+                                temp.pELMT(this.ELMT(k,l), k, l);
+                            } else if (k < i && l > j) {
+                                temp.pELMT(this.ELMT(k,l), k, l - 1);
+                            } else if (k > i && l < j) {
+                                temp.pELMT(this.ELMT(k,l), k - 1, l);
+                            } else if (k > i && l > j) {
+                                temp.pELMT(this.ELMT(k,l), k - 1, l - 1);
+                            }
+                        }
+                    }
+                    adj.pELMT(Math.pow(-1, i + j) * temp.Determinan(), i, j);
+                }
+            }
+            return adj;
+        } else {
+            System.out.println("Matriks bukan persegi");
+            return null;
+        }
+    }
+
+    public void Transpose() {
+        // KAMUS LOKAL
+        Matrix temp = new Matrix();
+        int i, j;
+        // ALGORITMA
+        temp.createMatrix(this.col, this.row);
+        for (i = 0; i < this.row; i++) {
+            for (j = 0; j < this.col; j++) {
+                temp.pELMT(this.ELMT(i,j), j, i);
+            }
+        }
+        this.copyMatrix(temp);
+    }
+
+    // mengetahui inverse matrix
+    public Matrix Inverse() {
+        // KAMUS LOKAL
+        Matrix inv = new Matrix();
+        double det;
+        // ALGORITMA
+        if (this.isSquare()) {
+            det = this.Determinan();
+            if (det != 0) {
+                inv = this.Adjoin();
+                inv.Transpose();
+                inv.MultiplySkalar(1 / det);
+                return inv;
+            } else {
+                System.out.println("Determinan matriks adalah 0");
+                return null;
+            }
+        } else {
+            System.out.println("Matriks bukan persegi");
+            return null;
+        }
+    }
+
+    // mencari determinan matrix dengan kofaktor
+    public double DeterminanKofaktor() {
+        // KAMUS LOKAL
+        double det = 0;
+        int i, j, k;
+        Matrix temp;
+        // ALGORITMA
+        if (this.isSquare()) {
+            if (this.row == 1) {
+                return this.ELMT(0,0);
+            } else if (this.row == 2) {
+                return (this.ELMT(0,0) * this.ELMT(1,1)) - (this.ELMT(0,1) * this.ELMT(1,0));
+            } else {
+                det = 0;
+                for (i = 0; i < this.row; i++) {
+                    temp = new Matrix();
+                    temp.createMatrix(this.row - 1, this.col - 1);
+                    for (j = 1; j < this.row; j++) {
+                        for (k = 0; k < this.col; k++) {
+                            if (k < i) {
+                                temp.pELMT(this.ELMT(j,k), j - 1, k);
+                            } else if (k > i) {
+                                temp.pELMT(this.ELMT(j,k), j - 1, k - 1);
+                            }
+                        }
+                    }
+                    det += Math.pow(-1, i) * this.ELMT(0,i) * temp.DeterminanKofaktor();
+                }
+                return det;
+            }
+        } else {
+            System.out.println("Matriks bukan persegi");
+            return 0;
+        }
+    }
+
+    // swap row matrix
+    public void swapRow(int row1, int row2) {
+        // KAMUS LOKAL
+        double temp;
+        int i;
+        // ALGORITMA
+        for (i = 0; i < this.col; i++) {
+            temp = this.ELMT(row1,i);
+            this.pELMT(this.ELMT(row2,i), row1, i);
+            this.pELMT(temp, row2, i);
+        }
+    }
+
+    // swap col matrix
+    public void swapCol(int col1, int col2) {
+        // KAMUS LOKAL
+        double temp;
+        int i;
+        // ALGORITMA
+        for (i = 0; i < this.row; i++) {
+            temp = this.ELMT(i,col1);
+            this.pELMT(this.ELMT(i,col2), i, col1);
+            this.pELMT(temp, i, col2);
+        }
+    }
+
+    // mengalikan baris matrix dengan skalar
+    public void multiplyRow(int row, double multiplier) {
+        // KAMUS LOKAL
+        int i;
+        // ALGORITMA
+        for (i = 0; i < this.col; i++) {
+            this.pELMT(this.ELMT(row,i) * multiplier, row, i);
+        }
+    }
+
+
+    public void addMultipleRow(int row1, int row2, double multiplier) {
+        // KAMUS LOKAL
+        int i;
+        // ALGORITMA
+        for (i = 0; i < this.col; i++) {
+            this.pELMT(this.ELMT(row1,i) + (this.ELMT(row2,i) * multiplier), row1, i);
+        }
+    }
+
+    public double DeterminanReduksi(){
+        // KAMUS LOKAL
+        int i, j, k, n, a;
+        double det, total, n1, n2, n3, temp;
+        // ALGORITMA
+        n = countRow();
+        det = 1;
+        total = 1;
+
+        for (i = 0; i<n; i++) {
+            a = i;
+
+            while (a < n && ELMT(a, i) == 0) {
+                a++;
+            }
+            if (a == n) {
+                return 0;
+            }
+        // Swap baris
+            if (a != i) {
+                for (j = 0; j < n; j++) {
+                    temp = ELMT(i, j);
+                    pELMT(ELMT(a, j), i, j);
+                    pELMT(temp, a, j);
+                }
+                det = det * Math.pow(-1, a - i);
+            }
+
+            for (j = i+1; j<n; j++) {
+                n1 = ELMT(i, i);
+                n2 = ELMT(j, i);
+    
+                for (k=0; k<n; k++) {
+                    n3 = (n1*ELMT(j, k)) - (n2*ELMT(i, k));
+                    pELMT(n3, j, k);
+                }
+    
+                total *= n1;
+            }
+        }
+    
+        // menghitung determinan
+        for (i = 0; i<n;i++) {
+            det *= ELMT(i, i);
+        }
+
+        return (det/total);
+    }
+
+
+    public static void main(String[] args) {
+        Matrix m = new Matrix();
+        Matrix a;
+        m.ScanMatrixPersegi();
+        m.changeCol(0, m.getCol(2));
+        m.printMatrix();
+        a = m;
+        a.printMatrix();
+        
+    }
 
 }
+    
+    
