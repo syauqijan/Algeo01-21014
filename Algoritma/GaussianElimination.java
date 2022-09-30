@@ -93,8 +93,8 @@ public class GaussianElimination {
    
  public static void main(String[] args) {
   
-  double A[][]= { {2,4,6},{4,5,6},{3,1,-2}};
-  double b[]= {18,24,4};
+  double A[][]= { {2,3,-1},{4,4,-3},{-2,3,-1}};
+  double b[]= {5,3,1};
   
   GaussianElimination  ge= new GaussianElimination(A,b);
   double solution[]=ge.solution();

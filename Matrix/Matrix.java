@@ -4,10 +4,11 @@ public class Matrix {
     public int row, col;
     public double[][] data = null;
 
-    // create empty matrix
-    public void emptyMatrix() {
-        this.row = 0;
-        this.col = 0;
+    // constructor
+    public Matrix(int row, int col) {
+        this.row = row;
+        this.col = col;
+        this.data = new double[row][col];
     }
 
     // create and fill in matrix 
@@ -94,7 +95,7 @@ public class Matrix {
     }
 
     // check if matrix is square
-    public boolean isSquare(Matrix m) {
-        return (m.countRow() ==  m.countCol());
+    public boolean isSquare() {
+        return (this.row ==  this.col);
     }
 }
