@@ -1,9 +1,10 @@
 package Matrix;
 
 public class Matrix {
-    private int row, col;
-    private double[][] data = null;
+    public int row, col;
+    public double[][] data = null;
 
+<<<<<<< HEAD
     // create empty matrix
     public void emptyMatrix() {
         this.row = 0;
@@ -12,6 +13,17 @@ public class Matrix {
 
     // create and fill in matrix 
     public  void createMatrix(int row, int col) {
+=======
+    // constructor
+    public Matrix(int row, int col) {
+        this.row = row;
+        this.col = col;
+        this.data = new double[row][col];
+    }
+
+    // create and fill in matrix 
+    public void createMatrix(int row, int col) {
+>>>>>>> a5c200e45b4e459160cdb57e144796071bc69dc7
         this.row = row;
         this.col = col;
         this.data = new double[row][col];
@@ -53,10 +65,23 @@ public class Matrix {
     public void printMatrix() {
         for (int i = 0; i < this.row; i++) {
             for (int j = 0; j < this.col; j++) {
-                System.out.print(this.data[i][j]);
+                System.out.printf("%.2f", this.data[i][j]);
                 System.out.print(" ");
             }
             System.out.println("");
+        }
+    }
+
+    public static void printSPLSolution(double[] result) {
+        for (int i=0; i<result.length; i++) {
+            System.out.printf("x%d = %.4f\n",i+1, result[i]);
+        }
+    }
+    
+    
+    public static void printSPLSolution(String[] result) {
+        for (int i=0; i<result.length; i++) {
+            System.out.printf("x%d = %s\n", i+1, result[i]);
         }
     }
 
@@ -81,7 +106,12 @@ public class Matrix {
     }
 
     // check if matrix is square
+<<<<<<< HEAD
     public boolean isSquare(Matrix m) {
         return (m.countRow() ==  m.countCol());
+=======
+    public boolean isSquare() {
+        return (this.row ==  this.col);
+>>>>>>> a5c200e45b4e459160cdb57e144796071bc69dc7
     }
 }
