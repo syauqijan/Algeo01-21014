@@ -9,6 +9,7 @@ import java.io.PrintStream;
 
 public class saveFile {
     public PrintStream stream;
+    public File file;
 
     public static final String DATE_FORMAT_NOW = "yyyy_MM_dd_HH_mm_ss";
     public static String now() {
@@ -19,13 +20,15 @@ public class saveFile {
 
     public void save() throws IOException {
         String tanggal = now();
-        File file = new File("test\\output\\output_"+tanggal+".txt");
+        this.file = new File("test\\output\\output_"+tanggal+".txt");
         this.stream = new PrintStream(file);
-        System.out.println("Berhasil menyimpan output sebagai "+file.getName());
+        System.out.println("Isi file yang akan disimpan:\n");
         System.setOut(this.stream);
     }
 
     public void closeFile() throws IOException {
+        System.out.println();
+        System.out.println("Berhasil menyimpan output sebagai "+ (this.file).getName());
         this.stream.close();
     }
     
