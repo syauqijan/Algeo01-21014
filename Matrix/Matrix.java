@@ -1,16 +1,19 @@
 package Matrix;
 
 import java.util.Scanner;
+import java.io.File;  // Import the File class
+import java.io.FileNotFoundException;  // Import this class to handle errors
+import java.util.Scanner; // Import the Scanner class to read text files
 
 public class Matrix {
-    public int row;
-    public int col;
-    private double[][] data = null;
+    public int row, col;
+    public double[][] data = null;
 
-    // create empty matrix
-    public void emptyMatrix() {
-        this.row = 0;
-        this.col = 0;
+    // constructor
+    public Matrix(int row, int col) {
+        this.row = row;
+        this.col = col;
+        this.data = new double[row][col];
     }
 
     // create and fill in matrix 
@@ -99,7 +102,8 @@ public class Matrix {
     public void printMatrix() {
         for (int i = 0; i < this.row; i++) {
             for (int j = 0; j < this.col; j++) {
-                System.out.println(this.data[i][j] + " ");
+                System.out.printf("%.2f", this.data[i][j]);
+                System.out.print(" ");
             }
             System.out.println();
         }
@@ -110,6 +114,46 @@ public class Matrix {
         System.out.println("Solusi SPL:");
         for (int i = 0; i < this.countRow(); i++) {
             System.out.println("x"+(i+1)+" = " + this.data[i][0]);
+        }
+    }
+
+    public static void printSPLSolution(double[] result) {
+        for (int i=0; i<result.length; i++) {
+            System.out.printf("x%d = %.4f\n",i+1, result[i]);
+        }
+    }
+    
+    
+    public static void printSPLSolution(String[] result) {
+        for (int i=0; i<result.length; i++) {
+            System.out.printf("x%d = %s\n", i+1, result[i]);
+        }
+    }
+
+    public void InputFile(String namefile) {
+        String parent = System.getProperty("user.dir");
+        String path = parent + "\\test\\" + namefile;
+        File file = new File(path);
+        try {
+            Scanner source = new Scanner(file);
+            int n = 0;
+            int m = 0;
+            while (source.hasNextLine()){
+                n = (source.nextLine().trim().split(" ")).length;
+                m++;
+            }
+            source.close();
+            this.createMatrix(m, n);
+            source = new Scanner(file);
+            for (int i = 0; i < row; i++){
+                for(int j = 0; j < col; j++){
+                    double x = source.nextDouble();
+                    this.pELMT(x, i, j);
+                }
+            }
+            source.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("File tidak ditemukan.");
         }
     }
 
@@ -140,7 +184,7 @@ public class Matrix {
 
     // mereturn matrix tanpa kolom col
     public Matrix deleteCol(int col) {
-        Matrix res = new Matrix();
+        Matrix res = new Matrix(this.row, this.col-1);
         res.createMatrix(this.row, this.col-1);
         int i, j;
         for (i=0; i<this.row; i++) {
@@ -156,7 +200,7 @@ public class Matrix {
 
     // mereturn matrix dari kolom col
     public Matrix getCol(int col) {
-        Matrix m = new Matrix();
+        Matrix m = new Matrix(this.row, 1);
         m.createMatrix(this.row, 1);
         for (int i = 0; i < this.row; i++) {
             m.pELMT(this.ELMT(i, col), i, 0);
@@ -182,7 +226,7 @@ public class Matrix {
     // mengalikan matrix dengan matrix m
     public void Multiply(Matrix m) {
         if (this.col == m.row) {
-            Matrix temp = new Matrix();
+            Matrix temp = new Matrix(this.row, m.countCol());
             temp.createMatrix(this.row, m.countCol());
             for (int i = 0; i < this.row; i++) {
                 for (int j = 0; j < m.countCol(); j++) {
@@ -214,7 +258,7 @@ public class Matrix {
             } else {
                 det = 0;
                 for (i = 0; i < this.row; i++) {
-                    temp = new Matrix();
+                    temp = new Matrix(this.row - 1, this.col - 1);
                     temp.createMatrix(this.row - 1, this.col - 1);
                     for (j = 1; j < this.row; j++) {
                         for (k = 0; k < this.col; k++) {
@@ -238,14 +282,16 @@ public class Matrix {
     // mengetahui matrix adjoin
     public Matrix Adjoin() {
         // KAMUS LOKAL
-        Matrix temp = new Matrix();
-        Matrix adj = new Matrix();
+        Matrix temp;
+        Matrix adj;
         int i, j, k, l;
         // ALGORITMA
         if (this.isSquare()) {
+            adj = new Matrix(this.row, this.col);
             adj.createMatrix(this.row, this.col);
             for (i = 0; i < this.row; i++) {
                 for (j = 0; j < this.col; j++) {
+                    temp = new Matrix(this.row - 1, this.col - 1);
                     temp.createMatrix(this.row - 1, this.col - 1);
                     for (k = 0; k < this.row; k++) {
                         for (l = 0; l < this.col; l++) {
@@ -272,7 +318,7 @@ public class Matrix {
 
     public void Transpose() {
         // KAMUS LOKAL
-        Matrix temp = new Matrix();
+        Matrix temp = new Matrix(this.col, this.row);
         int i, j;
         // ALGORITMA
         temp.createMatrix(this.col, this.row);
@@ -287,7 +333,7 @@ public class Matrix {
     // mengetahui inverse matrix
     public Matrix Inverse() {
         // KAMUS LOKAL
-        Matrix inv = new Matrix();
+        Matrix inv;
         double det;
         // ALGORITMA
         if (this.isSquare()) {
@@ -322,7 +368,7 @@ public class Matrix {
             } else {
                 det = 0;
                 for (i = 0; i < this.row; i++) {
-                    temp = new Matrix();
+                    temp = new Matrix(this.row - 1, this.col - 1);
                     temp.createMatrix(this.row - 1, this.col - 1);
                     for (j = 1; j < this.row; j++) {
                         for (k = 0; k < this.col; k++) {
@@ -438,15 +484,11 @@ public class Matrix {
         return (det/total);
     }
 
-
+    // tes inputfile
     public static void main(String[] args) {
-        Matrix m = new Matrix();
-        Matrix a;
-        m.ScanMatrixPersegi();
-        m.changeCol(0, m.getCol(2));
+        Matrix m = new Matrix(0, 0);
+        m.InputFile("test1.txt");
         m.printMatrix();
-        a = m;
-        a.printMatrix();
         
     }
 
