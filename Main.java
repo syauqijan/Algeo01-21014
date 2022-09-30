@@ -13,8 +13,8 @@ public class Main {
         do {
             Menu.mainMenu();
             pilihan = input.nextInt();
-
-            if (pilihan == 4) {Interpolation();}
+            if (pilihan == 1) {SPL();}
+            else if (pilihan == 4) {Interpolation();}
             else if (pilihan == 5) {Bicubic();}
             else if (pilihan == 7) {
                 System.out.println("    Terima kasih telah menggunakan Matrix Calculator    ");
@@ -22,7 +22,9 @@ public class Main {
             else {System.out.println("Program " + pilihan + " tidak ditemukan");}
         } while (pilihan != 7);
     }
-    
+    public static void SPL(){
+        Menu.splMenu();
+    }
     public static void Interpolation() {
         Matrix m;
         double x;
