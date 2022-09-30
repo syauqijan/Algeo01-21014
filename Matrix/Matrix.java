@@ -1,33 +1,29 @@
 package Matrix;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.io.*;
-
 public class Matrix {
     private int row, col;
     private double[][] data = null;
 
     // create empty matrix
-    public emptyMatrix() {
+    public void emptyMatrix() {
         this.row = 0;
         this.col = 0;
     }
 
     // create and fill in matrix 
-    public createMatrix(int row, int col) {
+    public  void createMatrix(int row, int col) {
         this.row = row;
         this.col = col;
         this.data = new double[row][col];
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < col; j++) {
-                pELMT(0, i, j)
+                pELMT(0, i, j);
             }
         }
     }
 
     // create identity matrix
-    public identityMatrix(int x) {
+    public void identityMatrix(int x) {
         this.row = x;
         this.col = x;
         this.data = new double [x][x];
@@ -36,7 +32,7 @@ public class Matrix {
                 if (i == j) {
                     pELMT(1, i, j);
                 } else {
-                    pELMT(0, i, j)
+                    pELMT(0, i, j);
                 }
             }
         }
@@ -48,7 +44,7 @@ public class Matrix {
         this.col = m.countCol();
         for (int i = 0; i < this.row; i++) {
             for (int j = 0; j < this.col; j++) {
-                pELMT(m.ELMT(i,j), i, j)
+                pELMT(m.ELMT(i,j), i, j);
             }
         }
     }
@@ -75,7 +71,7 @@ public class Matrix {
     }
 
     // return number of columns
-    public void countRow() {
+    public int countCol() {
         return this.col;
     }
 
@@ -85,7 +81,7 @@ public class Matrix {
     }
 
     // check if matrix is square
-    public boolean isSquare() {
-        return (this.countRow ==  this.countCol)
+    public boolean isSquare(Matrix m) {
+        return (m.countRow() ==  m.countCol());
     }
 }
