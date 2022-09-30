@@ -17,7 +17,7 @@ public class saveFile {
     return sdf.format(cal.getTime());
     }
 
-    public void saveFile() throws IOException {
+    public void save() throws IOException {
         String tanggal = now();
         File file = new File("test\\output\\output_"+tanggal+".txt");
         this.stream = new PrintStream(file);
