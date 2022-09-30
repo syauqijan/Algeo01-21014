@@ -3,7 +3,7 @@ import Matrix.Matrix;
 
 public class Cramer {
     public static void Solve(Matrix A, Matrix B) {
-        Matrix res = new Matrix();
+        Matrix res = new Matrix(0,0);
         Matrix temp;
         double detA = A.Determinan();
         int i;
@@ -17,7 +17,7 @@ public class Cramer {
     }
 
     public static Matrix copyM(Matrix A) {
-        Matrix res = new Matrix();
+        Matrix res = new Matrix(0,0);
         res.createMatrix(A.row, A.col);
         int i, j;
         for (i=0; i<A.row; i++) {
