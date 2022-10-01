@@ -6,7 +6,7 @@ import java.io.File;  // Import the File class
 import java.io.FileNotFoundException;  // Import this class to handle errors
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Scanner; // Import the Scanner class to read text files
+
 
 public class Matrix {
     public int row, col;
@@ -144,7 +144,7 @@ public class Matrix {
         System.out.println("Masukkan nama file: ");
         BufferedReader scn = new BufferedReader(new InputStreamReader(System.in));
         String nameFile = scn.readLine();
-        while(!isFileExist(nameFile)) {
+        while(!isFileExist(nameFile) || nameFile.equals("")) {
             System.out.println("File tidak ditemukan.");
             System.out.println("Masukkan nama file: ");
             nameFile = scn.readLine();
@@ -175,6 +175,7 @@ public class Matrix {
                 }
             }
             source.close();
+            System.out.println("File berhasil dibaca.");
         } catch (FileNotFoundException e) {
             System.out.println("File tidak ditemukan.");
 
