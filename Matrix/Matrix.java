@@ -484,12 +484,14 @@ public class Matrix {
         return (det/total);
     }
 
+/*
     // tes inputfile
     public static void main(String[] args) {
         Matrix m = new Matrix(0, 0);
-        m.InputFile("test1.txt");
-        m.printMatrix();
-        
+        System.out.println("\nMasukkan nama file: ");
+        fileName = input.next();
+        m.printMatrix();  
     }
+*/
 
 }

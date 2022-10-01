@@ -54,7 +54,7 @@ public class Menu {
         System.out.print("Masukan pilihan: ");
     }
 
-    public static void OutputMenu() {
+    public static void outputMenuType() {
         System.out.println("");
         System.out.println("            Pilih jenis output          ");
         System.out.println("1. File");
