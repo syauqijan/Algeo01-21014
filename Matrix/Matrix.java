@@ -1,8 +1,17 @@
 package Matrix;
 
 import java.util.Scanner;
+<<<<<<< HEAD
 import java.io.File; 
 import java.io.FileNotFoundException; 
+=======
+import java.io.BufferedReader;
+import java.io.File;  // Import the File class
+import java.io.FileNotFoundException;  // Import this class to handle errors
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+>>>>>>> 50c7aa506b54aecd08ee82e59b36dfbf2efe7b65
 
 public class Matrix {
     public int row, col;
@@ -60,7 +69,7 @@ public class Matrix {
 
     public void ScanMatrixB() {
         try (Scanner scan = new Scanner(System.in)) {
-            System.out.print("Masukkan jumlah kolom: ");
+            System.out.print("Masukkan jumlah baris: ");
             int n = scan.nextInt();
             this.createMatrix(1, n);
             for (int i = 0; i < n; i++) {
@@ -129,6 +138,26 @@ public class Matrix {
         }
     }
 
+    public boolean isFileExist(String namefile) {
+        String parent = System.getProperty("user.dir");
+        String path = parent + "\\test\\" + namefile;
+        File file = new File(path);
+        return file.exists();
+    }
+
+    public void loopInputFile() throws IOException {
+        System.out.println("Masukkan nama file: ");
+        BufferedReader scn = new BufferedReader(new InputStreamReader(System.in));
+        String nameFile = scn.readLine();
+        while(!isFileExist(nameFile) || nameFile.equals("")) {
+            System.out.println("File tidak ditemukan.");
+            System.out.println("Masukkan nama file: ");
+            nameFile = scn.readLine();
+        }
+        this.InputFile(nameFile);
+
+    }
+
     public void InputFile(String namefile) {
         String parent = System.getProperty("user.dir");
         String path = parent + "\\test\\" + namefile;
@@ -151,8 +180,10 @@ public class Matrix {
                 }
             }
             source.close();
+            System.out.println("File berhasil dibaca.");
         } catch (FileNotFoundException e) {
             System.out.println("File tidak ditemukan.");
+
         }
     }
 
@@ -207,7 +238,7 @@ public class Matrix {
         return m;
     }
 
-    // mereturn penggantian kolom i dengan matrix m, prekondisi: matrix m berkolom 1
+    // penggantian kolom i dengan matrix m, prekondisi: matrix m berkolom 1
     public void changeCol(int i, Matrix m) {
         for (int j = 0; j < this.row; j++) {
             this.pELMT(m.ELMT(j, 0), j, i);
@@ -483,12 +514,13 @@ public class Matrix {
         return (det/total);
     }
 
+/*
     // tes inputfile
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Matrix m = new Matrix(0, 0);
-        m.InputFile("test2.txt");
+        m.loopInputFile();
         m.printMatrix();
-        
     }
+*/
 
 }

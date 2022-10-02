@@ -14,7 +14,7 @@ public class Interpolasi {
         System.out.print("Masukkan jumlah pasangan: ");
         Scanner input = new Scanner(System.in);
         int n = input.nextInt();
-
+        System.out.println("");
         Matrix m = new Matrix(n, 2);
         System.out.println("Masukkan pasangan titik-titik: ");
         for (i = 0; i < n; i++) {
@@ -67,7 +67,7 @@ public class Interpolasi {
         
         double hasilTaksir = 0;
         Matrix n = m;
-        OBETInterpolasi.gaussJordanElimination(n);
+        OBETInterpolasi.eliminasiGaussJordan(n);
         double[] result = solusiTunggal(n);
 
         System.out.println("");

@@ -4,7 +4,7 @@ import Matrix.Matrix;
 public class Cramer {
     public static void Solve(Matrix A, Matrix B) {
         Matrix res = new Matrix(0,0);
-        Matrix temp;
+        Matrix temp = new Matrix(0,0);
         double detA = A.Determinan();
         int i;
         res.createMatrix(A.row, 1);
@@ -27,4 +27,4 @@ public class Cramer {
         }
         return res;
     }
-}
+    }
