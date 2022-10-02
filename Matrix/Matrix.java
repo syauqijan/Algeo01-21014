@@ -1,9 +1,8 @@
 package Matrix;
 
 import java.util.Scanner;
-import java.io.File;  // Import the File class
-import java.io.FileNotFoundException;  // Import this class to handle errors
-import java.util.Scanner; // Import the Scanner class to read text files
+import java.io.File; 
+import java.io.FileNotFoundException; 
 
 public class Matrix {
     public int row, col;
@@ -487,7 +486,7 @@ public class Matrix {
     // tes inputfile
     public static void main(String[] args) {
         Matrix m = new Matrix(0, 0);
-        m.InputFile("test1.txt");
+        m.InputFile("test2.txt");
         m.printMatrix();
         
     }
