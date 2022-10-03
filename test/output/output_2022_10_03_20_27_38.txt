@@ -1,0 +1,9 @@
+
+Penyelesaian sistem persamaan dengan metode eliminasi Gauss menghasilkan: 
+a(0) = 6.7620E-01, a(1) = 2.2660E-01, a2 = -6.3999E-03.
+ 
+Polinom interpolasi yang melalui ke-3 buah titik tersebut adalah p2(x) =
+6.7620E-01 + 2.2660E-01x^1 + -6.3999E-03^2.
+
+Dengan menggunakan polinom ini, maka nilai fungsi pada x = 9.2 dapat ditaksir sebagai berikut: p2(9.2) = 
+6.7620E-01 + 2.2660E-01(9.2)^1 + -6.3999E-03(9.2)^2 = 2.2192
