@@ -91,14 +91,17 @@ public class GaussJordan {
 
       int i, j;
 
-      System.out.print("Masukkan jumlah n matriks persegi: ");
+      System.out.print("Masukkan jumlah baris matriks persegi: ");
       Scanner input = new Scanner(System.in);
-      int n = input.nextInt();
+      int row = input.nextInt();
       System.out.println("");
-      Matrix m = new Matrix(n,n);
+      System.out.print("Masukkan jumlah baris matriks persegi: ");
+      int col = input.nextInt();
+      System.out.println("");
+      Matrix m = new Matrix(row,col);
       System.out.println("Masukkan matriks persegi: ");
-      for (i = 0; i < n; i++) {
-          for (j = 0; j < n; j++) {
+      for (i = 0; i < row; i++) {
+          for (j = 0; j < col; j++) {
               m.data[i][j] = input.nextDouble();
           }
       }
