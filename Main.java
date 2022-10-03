@@ -345,23 +345,30 @@ public class Main {
     }
 
     public static void Bicubic() {
-        Matrix m, xy, mInv;
+        Matrix m, mInv;
         int i, j, row = 0;
         double fxy = 0;
-        
-        System.out.println("\nInput matriks: ");
+        float x, y;
+
+        Scanner input = new Scanner(System.in);
+
         m = Bikubik.changeMatrixSize();
-        xy = Bikubik.inputXY();
-        mInv = (Bikubik.Matrix16x16()).Inverse();
+        mInv = Bikubik.Matrix16x16();
         m.Multiply(mInv);
 
-        for (j = 0; j < 4; j++) {
-            for (i = 0; i < 4; i++) {
-                fxy += m.ELMT(row, 0) * ((double) Math.pow(xy.data[0][0], i)) * ((double) Math.pow(xy.data[1][0], j));
+        System.out.printf("Masukkan nilai x: ");
+        x = input.nextFloat();
+        System.out.printf("Masukkan nilai y: ");
+        y = input.nextFloat();
+  
+        for (j = 0; j <= 3; j++) {
+            for (i = 0; i <= 3; i++) {
+                fxy += m.ELMT(row, 0) * (float) Math.pow(x, i) * (float) Math.pow(y, j);
                 row++;
             }
         }
-        System.out.printf("f(%.4f, %.4f) = %.4f\n",xy.data[0][0] , xy.data[1][0], fxy);
+  
+        System.out.printf("f(%.4f, %.4f) = %.4f\n", x, y, fxy);
     }
 
     public static void RLB() {

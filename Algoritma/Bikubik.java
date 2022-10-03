@@ -4,36 +4,6 @@ import java.util.Scanner;
 import Matrix.Matrix;
 
 public class Bikubik {
-    
-    public static Matrix inputBicubic() {
-
-        int i, j;
-
-        Scanner input = new Scanner(System.in);
-
-        Matrix m = new Matrix(4, 4);
-        for (i = 0; i < 4; i++) {
-            for (j = 0; j < 4; j++) {
-                m.data[i][j] = input.nextDouble();
-            }
-        }
-        return m;
-    }
-
-    public static Matrix inputXY() {
-        // memasukkan input x yang akan ditaksir
-
-        int j;
-
-        Scanner input = new Scanner(System.in);
-
-        Matrix m = new Matrix(1, 2);
-        System.out.println("Masukkan nilai x dan y yang akan ditaksir: ");
-        for (j = 0; j < 2; j++) {
-            m.data[0][j] = input.nextDouble();
-        }
-        return m;
-    }
 
     public static Matrix Matrix16x16() {
 
@@ -53,14 +23,16 @@ public class Bikubik {
                 row++;
             }
         }
-        return m;
+        Matrix mInv = m.Inverse();
+        return mInv;
     }
 
     public static Matrix changeMatrixSize() {
         int i, j, row = 0, col = 0;
 
+        Matrix m1 = new Matrix(0,0);
         Matrix m = new Matrix(16, 1);
-        Matrix m1 = Bikubik.inputBicubic();
+        m1.loopInputFile();
 
         for (i = 0; i < 4; i++) {
             for (j = 0; j < 4; j++) {
