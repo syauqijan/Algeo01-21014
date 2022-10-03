@@ -1,6 +1,6 @@
 # Algeo01-21014
 Tugas Besar Aljabar Geometri 1\
-Sistem Persamaan Linier, Determinan, dan Aplikasinya\
+Sistem Persamaan Linier, Determinan, dan Aplikasinya
 
 <table>
     <tr>
