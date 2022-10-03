@@ -143,7 +143,69 @@ public class Main {
     }
 
     public static void InvGaussJordan() {
+        do {
+            flag = false;
+            Menu.inputMenuType();
+            pilihan = input.nextLine();
+            switch (pilihan) {
+                case "1":
+                    InvGaussJordanFinal(1);
+                    break;
+                case "2":
+                    InvGaussJordanFinal(2);;
+                    break;
+                case "0":
+                    Inverse();
+                    break;
+                case "999":
+                    System.out.println("\nTerima kasih telah menggunakan program ini.");
+                    break;
+                default:
+                    System.out.println("Pilihan tidak tersedia. Silakan ulangi input.");
+                    flag = true;
+                    break;
+            }
+        } while(flag);
+        }
 
+    public static void InvGaussJordanFinal(int i) {
+        Matrix m = new Matrix(0, 0);
+        if (i == 1) {
+            m.loopInputFile();
+        } else {
+            m.ScanMatrix(input);
+            System.out.println(input.nextLine());
+        }
+        do {
+            flag = false;
+            Menu.outputMenuType();
+            pilihan = input.nextLine();
+            switch (pilihan) {
+                case "1":
+                    saveFile saver = new saveFile();
+                    saver.save();
+                    m.printInverseGaussJordan();
+                    saver.closeFile();
+                    break;
+                case "2":
+                    System.out.println();
+                    m.printInverseGaussJordan();
+                    break;
+                case "0":
+                    InvGaussJordan();
+                    break;
+                case "999":
+                    System.out.println("\nTerima kasih telah menggunakan program ini.");
+                    break;
+                default:
+                    System.out.println("Pilihan tidak tersedia. Silakan ulangi input.");
+                    flag = true;
+                    break;
+            }
+        } while (flag);
+        if (pilihan != "999") {
+            exit();
+        }
     }
 
     public static void InvAdj() {
@@ -178,6 +240,7 @@ public class Main {
             m.loopInputFile();
         } else {
             m.ScanMatrix(input);
+            System.out.println(input.nextLine());
         }
         do {
             flag = false;
@@ -191,6 +254,7 @@ public class Main {
                     saver.closeFile();
                     break;
                 case "2":
+                    System.out.println();
                     m.printInverse();
                     break;
                 case "0":
@@ -205,7 +269,9 @@ public class Main {
                     break;
             }
         } while (flag);
-        exit();
+        if (pilihan != "999") {
+            exit();
+        }
     }
 
     public static void Interpolation() {
@@ -259,7 +325,71 @@ public class Main {
     }
 
     public static void SPLInverse() {
+        do {
+            flag = false;
+            Menu.inputMenuType();
+            pilihan = input.nextLine();
+            switch (pilihan) {
+                case "1":
+                    SPLInverseFinal(1);
+                    break;
+                case "2":
+                    SPLInverseFinal(2);
+                    break;
+                case "0":
+                    SPL();
+                    break;
+                case "999":
+                    System.out.println("\nTerima kasih telah menggunakan program ini.");
+                    break;
+                default:
+                    System.out.println("Pilihan tidak tersedia. Silakan ulangi input.");
+                    flag = true;
+                    break;
+            }
+        } while (flag);
 
+    }
+
+    public static void SPLInverseFinal(int i) {
+        Matrix m = new Matrix(0,0);
+        if (i==1) {
+            m.loopInputFile();
+        } else {
+            System.out.println("Masukkan augmented matrix A dan B:");
+            m.ScanMatrix(input);
+            System.out.println(input.nextLine());
+        }
+        do {
+            flag = false;
+            Menu.outputMenuType();
+            pilihan = input.nextLine();
+            switch (pilihan) {
+                case "1":
+                    saveFile saver = new saveFile();
+                    saver.save();
+                    SPLInverse.Solve(m.deleteCol(m.countCol()-1), m.getCol(m.countCol()-1));;
+                    saver.closeFile();
+                    break;
+                case "2":
+                    System.out.println();
+                    SPLInverse.Solve(m.deleteCol(m.countCol()-1), m.getCol(m.countCol()-1));
+                    break;
+                case "0":
+                    SPLInverse();
+                    break;
+                case "999":
+                    System.out.println("\nTerima kasih telah menggunakan program ini.");
+                    break;
+                default:
+                    System.out.println("Pilihan tidak tersedia. Silakan ulangi input.");
+                    flag = true;
+                    break;
+            }
+        } while (flag);
+        if (pilihan != "999") {
+            exit();
+        }
     }
 
     public static void SPLCramer() {
@@ -295,6 +425,7 @@ public class Main {
         } else {
             System.out.println("Masukkan augmented matrix A dan B:");
             m.ScanMatrix(input);
+            System.out.println(input.next());
         }
         do {
             flag = false;
@@ -308,6 +439,7 @@ public class Main {
                     saver.closeFile();
                     break;
                 case "2":
+                    System.out.println();
                     Cramer.Solve(m.deleteCol(m.countCol()-1), m.getCol(m.countCol()-1));
                     break;
                 case "0":
@@ -322,7 +454,9 @@ public class Main {
                     break;
             }
         } while (flag);
-        exit();
+        if (pilihan != "999") {
+            exit();
+        }
     }
 
     public static void DetRed() {
@@ -357,7 +491,7 @@ public class Main {
         if (i==1){
             m.loopInputFile();
         } else {
-            m.ScanMatrixPersegi(input);
+            m.ScanMatrix(input);
         }
         do {
             flag = false;
@@ -371,6 +505,7 @@ public class Main {
                     saver.closeFile();
                     break;
                 case "2":
+                    System.out.println();
                     m.printDeterminanReduksi();
                     break;
                 case "0":
@@ -385,7 +520,9 @@ public class Main {
                     break;
             }
         } while (flag);
-        exit();
+        if (pilihan != "999") {
+            exit();
+        }
     }
 
     public static void DetKof() {
@@ -420,6 +557,7 @@ public class Main {
             m.loopInputFile();
         } else {
             m.ScanMatrixPersegi(input);
+            System.out.println(input.nextLine());
         }
         do {
             flag = false;
@@ -433,6 +571,7 @@ public class Main {
                     saver.closeFile();
                     break;
                 case "2":
+                    System.out.println();
                     m.printDeterminanKofaktor();
                     break;
                 case "0":
@@ -447,7 +586,9 @@ public class Main {
                     break;
             }
         } while (flag);
-        exit();
+        if (pilihan != "999") {
+            exit();
+        }
 
     }
 

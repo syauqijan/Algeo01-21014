@@ -18,6 +18,8 @@ public class Menu {
 
     public static void splMenu() {
         System.out.println("");
+        System.out.println("    PILIH METODE YANG INGIN DIGUNAKAN     ");
+        System.out.println("");
         System.out.println("1. Metode Eliminasi Gauss");
         System.out.println("2. Metode Eliminasi Gauss-Jordan");
         System.out.println("3. Metode Matriks Balikan");
@@ -29,6 +31,8 @@ public class Menu {
 
     public static void determinantMenu() {
         System.out.println("");
+        System.out.println("    PILIH METODE YANG INGIN DIGUNAKAN     ");
+        System.out.println("");
         System.out.println("1. Metode Reduksi Baris");
         System.out.println("2. Metode Ekspansi Kofaktor");
         System.out.println("0. Kembali");
@@ -36,17 +40,9 @@ public class Menu {
         System.out.print("Masukkan pilihan: ");
     }
 
-    public static void transposeMenu() {
-        System.out.println("");
-        System.out.println("1. Transpose Matriks");
-        System.out.println("2. Matriks Kofaktor");
-        System.out.println("3. Adjoint Matriks");
-        System.out.println("0. Kembali");
-        System.out.println("999. Keluar");
-        System.out.print("Masukkan pilihan: ");
-    }
-
     public static void inverseMenu() {
+        System.out.println("");
+        System.out.println("    PILIH METODE YANG INGIN DIGUNAKAN     ");
         System.out.println("");
         System.out.println("1. Metode Gauss-Jordan");
         System.out.println("2. Matriks Adjoint");

@@ -495,7 +495,9 @@ public class Matrix {
             if (a == n) {
                 return 0;
             }
+
         // Swap baris
+        
             if (a != i) {
                 for (j = 0; j < n; j++) {
                     temp = ELMT(i, j);
@@ -526,4 +528,76 @@ public class Matrix {
         return (det/total);
     }
 
+    public void printInverseGaussJordan() {
+        if (this.isSquare()) {
+            this.InverseGaussJordan();
+            if (!this.isAnyNaNInf()) {
+                this.printMatrix();
+            } else {
+                System.out.println("Matriks tidak memiliki balikan karena tidak dapat menghasilkan matriks identitas setelah dilakukan operasi OBE.");
+            }
+        } else {     
+            System.out.println("Matriks tidak memiliki balikan karena bukan matriks persegi.");
+        }
+        }
+
+    public boolean isAnyNaNInf() {
+        int n = countRow();
+        for (int i=0; i<n; i++) {
+            for(int j=0; j<n; j++) {
+                if (Double.isNaN(this.ELMT(i, j)) || Double.isInfinite(this.ELMT(i, j))) {
+                    return true;
+                }
+            }
+        } return false;
+    }
+
+    public void InverseGaussJordan() {
+        // KAMUS LOKAL
+        int i, j, n;
+        double temp;
+        // ALGORITMA
+        n = countRow();
+        Matrix tempMatrix = new Matrix(n, n);
+        tempMatrix.createMatrix(n, n);
+        for (i = 0; i < n; i++) {
+            for (j = 0; j < n; j++) {
+                tempMatrix.pELMT(ELMT(i, j), i, j);
+            }
+        }
+
+        for (i = 0; i < n; i++) {
+            for (j = 0; j < n; j++) {
+                if (i == j) {
+                    pELMT(1, i, j);
+                } else {
+                    pELMT(0, i, j);
+                }
+            }
+        }
+
+        for (i = 0; i < n; i++) {
+            if (tempMatrix.ELMT(i, i) == 0) {
+                for (j = i + 1; j < n; j++) {
+                    if (tempMatrix.ELMT(j, i) != 0) {
+                        tempMatrix.swapRow(i, j);
+                        this.swapRow(i, j);
+                        break;
+                    }
+                }
+            }
+
+            temp = tempMatrix.ELMT(i, i);
+            tempMatrix.multiplyRow(i, 1/temp);
+            this.multiplyRow(i, 1/temp);
+
+            for (j = 0; j < n; j++) {
+                if (j != i) {
+                    temp = tempMatrix.ELMT(j, i);
+                    tempMatrix.addMultipleRow(j, i, -temp);
+                    this.addMultipleRow(j, i, -temp);
+                }
+            }
+        }
+    }
 }
