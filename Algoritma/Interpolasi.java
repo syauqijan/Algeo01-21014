@@ -1,8 +1,9 @@
 package Algoritma;
 
 import java.util.Scanner;
-
 import Matrix.Matrix;
+
+import Utility.Menu;
 
 public class Interpolasi {
 
@@ -27,9 +28,20 @@ public class Interpolasi {
 
     public static double inputX() {
     // memasukkan input x yang akan ditaksir
-
-        System.out.println("Masukkan nilai yang akan ditaksir: ");
+        
         Scanner input = new Scanner(System.in);
+        
+        /* 
+        do {
+        Menu.chooseinputX();
+        int pilihan = input.nextInt();
+            if (pilihan == 1) {
+                System.out.println("Masukkan nilai yang akan ditaksir: ");   
+            }
+        }
+        */
+        
+        System.out.println("Masukkan nilai yang akan ditaksir: ");
         double x = input.nextDouble();
 
         return x;
@@ -67,7 +79,8 @@ public class Interpolasi {
         
         double hasilTaksir = 0;
         Matrix n = m;
-        OBETInterpolasi.eliminasiGaussJordan(n);
+        GaussianElimination tes = new GaussianElimination(null, null);
+        tes.solution();
         double[] result = solusiTunggal(n);
 
         System.out.println("");

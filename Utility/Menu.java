@@ -61,4 +61,12 @@ public class Menu {
         System.out.println("2. Keyboard");
         System.out.print("Masukan pilihan: ");
     }
+
+    public static void chooseinputX() {
+        System.out.println("");
+        System.out.println("            Pilih jenis input          ");
+        System.out.println("1. Tanggal");
+        System.out.println("2. Koordinat x");
+        System.out.print("Masukan pilihan: ");
+    }
 }

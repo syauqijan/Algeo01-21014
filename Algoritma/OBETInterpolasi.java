@@ -3,7 +3,6 @@ package Algoritma;
 import Matrix.Matrix;
 
 public class OBETInterpolasi {
-    public static int swapCount; 
 
     public static void eliminasiGaussJordan(Matrix m) {// transversal setiap baris
         for (int iBrs=0; iBrs<m.row;iBrs++) {

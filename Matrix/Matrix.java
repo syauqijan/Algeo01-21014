@@ -74,6 +74,7 @@ public class Matrix {
         }
     }
 
+    /* 
     // create identity matrix
     public void identityMatrix(int x) {
         this.row = x;
@@ -89,6 +90,8 @@ public class Matrix {
             }
         }
     }
+    */
+
 
     // create copy matrix
     public void copyMatrix (Matrix m) {
@@ -507,6 +510,22 @@ public class Matrix {
         }
 
         return (det/total);
+    }
+
+    public static Matrix multiplyMatrix(Matrix m1, Matrix m2) {
+        
+        int i, j, k;
+        
+        Matrix m = new Matrix(m1.row, m2.col);
+        for (i = 0; i < m1.row; i++) {
+            for (j = 0; j < m2.col; j++) {
+                m.data[i][j] = 0;
+                for (k = 0; k < m2.row; k++) {
+                    m.data[i][j] += m1.ELMT(i, k) * m2.ELMT(k, j);
+                }
+            }
+        }
+        return m;
     }
 
 /*
