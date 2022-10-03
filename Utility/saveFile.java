@@ -20,19 +20,22 @@ public class saveFile {
     }
 
 
-    public void save() throws FileNotFoundException  {
-        String tanggal = now();
-        this.file = new File("test\\output\\output_"+tanggal+".txt");
-        PrintStream printStream = new PrintStream(this.file);
-        System.setOut(printStream);
+    public void save()  {
+        try {
+            String tanggal = now();
+            this.file = new File("test\\output\\output_"+tanggal+".txt");
+            PrintStream printStream = new PrintStream(this.file);
+            System.setOut(printStream);
+        } catch (FileNotFoundException e) {
+            System.out.println("File tidak ditemukan");
+        }
     }
 
-    public void closeFile() throws FileNotFoundException  {
+    public void closeFile()  {
         PrintStream consoleStream = new PrintStream(
-                                    new FileOutputStream(FileDescriptor.out));
+            new FileOutputStream(FileDescriptor.out));
         System.setOut(consoleStream);
         System.out.println("Berhasil menyimpan file sebagai "+this.file.getName());
     }
-    
-    }
+}
 
