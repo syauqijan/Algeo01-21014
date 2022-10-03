@@ -23,12 +23,12 @@ public class Bikubik {
                 row++;
             }
         }
-        Matrix mInv = m.Inverse();
-        return mInv;
+        m.InverseGaussJordan();
+        return m;
     }
 
     public static Matrix changeMatrixSize() {
-        int i, j, row = 0, col = 0;
+        int i, j, row = 0;
 
         Matrix m1 = new Matrix(0,0);
         Matrix m = new Matrix(16, 1);
@@ -36,15 +36,16 @@ public class Bikubik {
 
         for (i = 0; i < 4; i++) {
             for (j = 0; j < 4; j++) {
-                m.data[row][col] = m1.data[i][j];
+                m.data[row][0] = m1.data[i][j];
                 row++;
             }
         }
-        return m;
+        return m1;
     } 
     
     public static void main(String[] args) {
-        Matrix16x16().printMatrix();
+        Matrix m = changeMatrixSize();
+        m.printMatrix();
     }
 }
 

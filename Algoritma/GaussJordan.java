@@ -34,7 +34,7 @@ public class GaussJordan {
         }      
       }       
      if ( mr!=i ) {
-        GaussElimination.swapRow(m, i, mr);      
+        m.swapRow(i, mr);      
      }
   }
     

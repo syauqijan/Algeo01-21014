@@ -49,22 +49,25 @@ public class GaussElimination {
     sol[i] = val/m.ELMT(i, i);
           
  }
- public static void swapRow(Matrix m, int r1, int r2) {
+ /* 
+   public static void swapRow(Matrix m, int r1, int r2) {
   
     for (int j = 0; j < m.col; j++) {
         double temp = m.data[r1][j];
         m.data[r1][j] = m.data[r2][j];
         m.data[r2][j] = temp;
     }
-    
-  }    
+ */
+     
  public static void add(Matrix m,int r1,int r2,double val) {  
   for (int i=0;i<m.countCol();i++) {
       double tmp=  val*m.ELMT(r1, i);
       m.pELMT(m.ELMT(r2, i)+tmp, r2, i);   
    }
 }
-public static void orderRow(Matrix m, int iRow, int iCol) {
+
+/*
+ public static void orderRow(Matrix m, int iRow, int iCol) {
     // menukar baris idx jika m[idx][idx]=0 dengan baris lain dibawahnya yang elemennya tidak 0
     int i = iRow+1;
     while (i < m.row) {
@@ -75,13 +78,15 @@ public static void orderRow(Matrix m, int iRow, int iCol) {
         i++;
     }
 }
+ */
+
 
  public void segitigaatas() {  
   for(int i=0;i<m.countRow()-1;i++) 
     {    
              int mr = this.maxpivot(i);
       if ( mr != i)
-      swapRow(m, i, mr);        
+      m.swapRow(i, mr);        
       for(int r2=i+1;r2<m.countRow();r2++) 
   {
     double ratio= m.ELMT(r2, i) / m.ELMT(i, i);

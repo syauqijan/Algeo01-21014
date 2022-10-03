@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Scanner;
 
 import Algoritma.*;
@@ -379,7 +380,51 @@ public class Main {
     }
 
     public static void SPLGaussJordan() {
-
+        int i;
+        Matrix m = new Matrix(0,0);
+        Matrix m1 = new Matrix(0,0);
+        double x;
+        if (i == 1) {
+            m.loopInputFile();
+        } else {
+            m = GaussJordan.inputTitik();
+            m1 = GaussJordan.inputHasil(m);
+        }
+        System.out.println("");
+        GaussJordan gj = new GaussJordan(m,m1);  
+        double sol[] =gj.solution();
+        do {
+            flag = false;
+            Menu.outputMenuType();
+            pilihan = input.nextLine();
+            switch (pilihan) {
+                case "1":
+                    saveFile saver = new saveFile();
+                    saver.save();
+                    System.out.println( "Solusi SPL dengan Gauss Jordan" );
+                    System.out.println(Arrays.toString(sol)); 
+                    saver.closeFile();
+                    break;
+                case "2":
+                    System.out.println();
+                    System.out.println( "Solusi SPL dengan Gauss Jordan" );
+                    System.out.println(Arrays.toString(sol)); 
+                    break;
+                case "0":
+                    Interpolation();
+                    break;
+                case "999":
+                    System.out.println("\nTerima kasih telah menggunakan program ini.");
+                    break;
+                default:
+                    System.out.println("Pilihan tidak tersedia. Silakan ulangi input.");
+                    flag = true;
+                    break;
+            }
+        } while (flag);
+        if (pilihan != "999") {
+            exit();
+        }
     }
 
     public static void SPLInverse() {

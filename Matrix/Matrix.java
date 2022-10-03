@@ -70,25 +70,6 @@ public class Matrix {
             }
         }
 
-    /* 
-    // create identity matrix
-    public void identityMatrix(int x) {
-        this.row = x;
-        this.col = x;
-        this.data = new double [x][x];
-        for (int i = 0; i < x; i++) {
-            for (int j = 0; j < x; j++) {
-                if (i == j) {
-                    pELMT(1, i, j);
-                } else {
-                    pELMT(0, i, j);
-                }
-            }
-        }
-    }
-    */
-
-
     // create copy matrix
     public void copyMatrix (Matrix m) {
         this.row = m.countRow();
@@ -147,17 +128,14 @@ public class Matrix {
             nameFile = scn.readLine();
             while(!isFileExist(nameFile) || nameFile.equals("")) {
                 System.out.println("File tidak ditemukan.");
-                System.out.println("\nMasukkan nama file: ");
+                System.out.println("Masukkan nama file: ");
                 nameFile = scn.readLine();
             } this.InputFile(nameFile);
             } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-
-        }
-        
-
+    }
 
     public void InputFile(String namefile) {
         String parent = System.getProperty("user.dir");
@@ -440,7 +418,6 @@ public class Matrix {
     }
 
     public static void orderRow(Matrix m, int iRow, int iCol) {
-        // menukar baris idx jika m[idx][idx]=0 dengan baris lain dibawahnya yang elemennya tidak 0
         int i = iRow+1;
         while (i < m.row) {
             if (m.data[i][iCol] != 0) {
@@ -510,9 +487,7 @@ public class Matrix {
             if (a == n) {
                 return 0;
             }
-
         // Swap baris
-        
             if (a != i) {
                 for (j = 0; j < n; j++) {
                     temp = ELMT(i, j);
@@ -542,7 +517,7 @@ public class Matrix {
 
         return (det/total);
     }
-
+    
     public void printInverseGaussJordan() {
         if (this.isSquare()) {
             this.InverseGaussJordan();

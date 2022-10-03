@@ -31,16 +31,6 @@ public class Interpolasi {
         
         Scanner input = new Scanner(System.in);
         
-        /* 
-        do {
-        Menu.chooseinputX();
-        int pilihan = input.nextInt();
-            if (pilihan == 1) {
-                System.out.println("Masukkan nilai yang akan ditaksir: ");   
-            }
-        }
-        */
-        
         System.out.println("Masukkan nilai yang akan ditaksir: ");
         double x = input.nextDouble();
 
@@ -85,7 +75,7 @@ public class Interpolasi {
         System.out.println("");
         System.out.print("Penyelesaian sistem persamaan dengan metode eliminasi Gauss menghasilkan: ");
         System.out.println("");
-        for (int i=0;i<result.length-1;i++) {
+        for (int i=0; i < result.length-1; i++) {
             System.out.format("a(%d) = %.4E, ", i, result[i]);
         }
         System.out.format("a%d = %.4E.\n ", result.length-1, result[result.length-1]);
