@@ -1,6 +1,8 @@
 package Matrix;
 
 import java.util.Scanner;
+import java.io.File; 
+import java.io.FileNotFoundException; 
 import java.io.BufferedReader;
 import java.io.File;  // Import the File class
 import java.io.FileNotFoundException;  // Import this class to handle errors
@@ -31,8 +33,8 @@ public class Matrix {
         }
     }
 
-    public void ScanMatrix() {
-        try (Scanner scan = new Scanner(System.in)) {
+    public void ScanMatrix(Scanner scan) {
+            System.out.println("Matrix berukuran baris x kolom.");
             System.out.print("Masukkan jumlah baris: ");
             int m = scan.nextInt();
             System.out.print("Masukkan jumlah kolom: ");
@@ -45,25 +47,20 @@ public class Matrix {
                 }
             }
         }
-        
-    }
 
-    public void ScanMatrixPersegi() {
-        try (Scanner scan = new Scanner(System.in)) {
-            System.out.print("Masukkan ukuran matriks: ");
+    public void ScanMatrixPersegi(Scanner scan) {
+            System.out.print("Masukkan ukuran matriks persegi: ");
             int n = scan.nextInt();
             this.createMatrix(n, n);
             for (int i = 0; i < n; i++) {
                 for (int j = 0; j < n; j++) {
                     double x = scan.nextDouble();
-                    pELMT(x, i, j);
+                    this.pELMT(x, i, j);
                 }
-            }
         }
     }
 
-    public void ScanMatrixB() {
-        try (Scanner scan = new Scanner(System.in)) {
+    public void ScanMatrixB(Scanner scan) {
             System.out.print("Masukkan jumlah baris: ");
             int n = scan.nextInt();
             this.createMatrix(1, n);
@@ -72,7 +69,6 @@ public class Matrix {
                 pELMT(x, 0, i);
             }
         }
-    }
 
     /* 
     // create identity matrix
@@ -143,18 +139,25 @@ public class Matrix {
         return file.exists();
     }
 
-    public void loopInputFile() throws IOException {
-        System.out.println("Masukkan nama file: ");
+    public void loopInputFile() {
+        System.out.println("\nMasukkan nama file: ");
         BufferedReader scn = new BufferedReader(new InputStreamReader(System.in));
-        String nameFile = scn.readLine();
-        while(!isFileExist(nameFile) || nameFile.equals("")) {
-            System.out.println("File tidak ditemukan.");
-            System.out.println("Masukkan nama file: ");
+        String nameFile;
+        try {
             nameFile = scn.readLine();
+            while(!isFileExist(nameFile) || nameFile.equals("")) {
+                System.out.println("File tidak ditemukan.");
+                System.out.println("Masukkan nama file: ");
+                nameFile = scn.readLine();
+            } this.InputFile(nameFile);
+            } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
-        this.InputFile(nameFile);
 
-    }
+        }
+        
+
 
     public void InputFile(String namefile) {
         String parent = System.getProperty("user.dir");
@@ -173,7 +176,7 @@ public class Matrix {
             source = new Scanner(file);
             for (int i = 0; i < row; i++){
                 for(int j = 0; j < col; j++){
-                    double x = source.nextDouble();
+                    double x = source.nextFloat();
                     this.pELMT(x, i, j);
                 }
             }
@@ -267,7 +270,15 @@ public class Matrix {
             }
             this.copyMatrix(temp);
         } else {
-            System.out.println("Matrix tidak dapat dikalikan");
+            System.out.println("Matrix tidak dapat dikalikan karena ukuran tidak sesuai.");
+        }
+    }
+
+    public void printDeterminan() {
+        if (this.isSquare()) {
+            System.out.println("Hasil determinan: " + this.Determinan());
+        } else {
+            System.out.println("Determinan tidak dapat dihitung karena bukan matriks persegi.");
         }
     }
 
@@ -278,7 +289,6 @@ public class Matrix {
         int i, j, k;
         Matrix temp;
         // ALGORITMA
-        if (this.isSquare()) {
             if (this.row == 1) {
                 return this.ELMT(0,0);
             } else if (this.row == 2) {
@@ -301,10 +311,6 @@ public class Matrix {
                 }
                 return det;
             }
-        } else {
-            System.out.println("Matriks bukan persegi");
-            return 0;
-        }
     } 
 
     // mengetahui matrix adjoin
@@ -364,20 +370,28 @@ public class Matrix {
         Matrix inv;
         double det;
         // ALGORITMA
-        if (this.isSquare()) {
-            det = this.Determinan();
-            if (det != 0) {
-                inv = this.Adjoin();
-                inv.Transpose();
-                inv.MultiplySkalar(1 / det);
-                return inv;
-            } else {
-                System.out.println("Determinan matriks adalah 0");
-                return null;
-            }
+        det = this.Determinan();
+            inv = this.Adjoin();
+            inv.Transpose();
+            inv.MultiplySkalar(1 / det);
+            return inv;
+    }
+
+    public void printInverse() {
+        if (!this.isSquare()) {
+            System.out.println("Matriks tidak memiliki balikan karena bukan matriks persegi.");
+        } else if (this.Determinan() == 0) {
+            System.out.println("Determinan matriks adalah 0, sehingga matriks tidak memiliki balikan.");
         } else {
-            System.out.println("Matriks bukan persegi");
-            return null;
+            this.Inverse().printMatrix();
+        }
+    }
+
+    public void printDeterminanKofaktor() { 
+        if (this.isSquare()) {
+            System.out.println("Hasil determinan: "+this.DeterminanKofaktor());
+        } else {
+            System.out.println("Determinan tidak dapat dihitung karena bukan matriks persegi.");
         }
     }
 
@@ -388,7 +402,6 @@ public class Matrix {
         int i, j, k;
         Matrix temp;
         // ALGORITMA
-        if (this.isSquare()) {
             if (this.row == 1) {
                 return this.ELMT(0,0);
             } else if (this.row == 2) {
@@ -411,10 +424,6 @@ public class Matrix {
                 }
                 return det;
             }
-        } else {
-            System.out.println("Matriks bukan persegi");
-            return 0;
-        }
     }
 
     // swap row matrix
@@ -460,6 +469,14 @@ public class Matrix {
         // ALGORITMA
         for (i = 0; i < this.col; i++) {
             this.pELMT(this.ELMT(row1,i) + (this.ELMT(row2,i) * multiplier), row1, i);
+        }
+    }
+
+    public void printDeterminanReduksi() { 
+        if (this.isSquare()) {
+            System.out.println("\nHasil determinan: "+this.DeterminanReduksi());
+        } else {
+            System.out.println("Determinan tidak dapat dihitung karena bukan matriks persegi.");
         }
     }
 
@@ -512,6 +529,7 @@ public class Matrix {
         return (det/total);
     }
 
+<<<<<<< HEAD
     public static Matrix multiplyMatrix(Matrix m1, Matrix m2) {
         
         int i, j, k;
@@ -537,4 +555,6 @@ public class Matrix {
     }
 */
 
+=======
+>>>>>>> fdfdf0235bf8fd06437951ffa870cb547648b605
 }

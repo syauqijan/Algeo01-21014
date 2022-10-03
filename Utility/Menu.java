@@ -11,7 +11,8 @@ public class Menu {
         System.out.println("4. Interpolasi Polinom");
         System.out.println("5. Interpolasi Bicubic");
         System.out.println("6. Regresi Linier Berganda");
-        System.out.println("7. Keluar");
+        System.out.println("7. BONUS");
+        System.out.println("999. Keluar");
         System.out.print("Masukkan pilihan: ");
     }
 
@@ -21,6 +22,8 @@ public class Menu {
         System.out.println("2. Metode Eliminasi Gauss-Jordan");
         System.out.println("3. Metode Matriks Balikan");
         System.out.println("4. Kaidah Cramer");
+        System.out.println("0. Kembali");
+        System.out.println("999. Keluar");
         System.out.print("Masukkan pilihan: ");
     }
 
@@ -28,6 +31,8 @@ public class Menu {
         System.out.println("");
         System.out.println("1. Metode Reduksi Baris");
         System.out.println("2. Metode Ekspansi Kofaktor");
+        System.out.println("0. Kembali");
+        System.out.println("999. Keluar");
         System.out.print("Masukkan pilihan: ");
     }
 
@@ -36,6 +41,8 @@ public class Menu {
         System.out.println("1. Transpose Matriks");
         System.out.println("2. Matriks Kofaktor");
         System.out.println("3. Adjoint Matriks");
+        System.out.println("0. Kembali");
+        System.out.println("999. Keluar");
         System.out.print("Masukkan pilihan: ");
     }
 
@@ -43,6 +50,8 @@ public class Menu {
         System.out.println("");
         System.out.println("1. Metode Gauss-Jordan");
         System.out.println("2. Matriks Adjoint");
+        System.out.println("0. Kembali");
+        System.out.println("999. Keluar");
         System.out.print("Masukkan pilihan: ");
     }
 
@@ -51,6 +60,8 @@ public class Menu {
         System.out.println("            Pilih jenis input          ");
         System.out.println("1. File");
         System.out.println("2. Keyboard");
+        System.out.println("0. Kembali");
+        System.out.println("999. Keluar");
         System.out.print("Masukan pilihan: ");
     }
 
@@ -59,14 +70,12 @@ public class Menu {
         System.out.println("            Pilih jenis output          ");
         System.out.println("1. File");
         System.out.println("2. Keyboard");
+        System.out.println("0. Kembali");
+        System.out.println("999. Keluar");
         System.out.print("Masukan pilihan: ");
     }
 
-    public static void chooseinputX() {
-        System.out.println("");
-        System.out.println("            Pilih jenis input          ");
-        System.out.println("1. Tanggal");
-        System.out.println("2. Koordinat x");
-        System.out.print("Masukan pilihan: ");
+    public static void exitMenu() {
+        System.out.println("\nApakah anda ingin kembali ke menu utama? (y/n)");
     }
 }
