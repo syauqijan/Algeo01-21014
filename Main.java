@@ -241,10 +241,23 @@ public class Main {
     }
 
     public static void Bicubic() {
-        Matrix m;
+        Matrix m, xy, mInv;
+        int i, j, row = 0;
+        double fxy = 0;
         
         System.out.println("\nInput matriks: ");
-        m = Bikubik.inputBicubic();
+        m = Bikubik.changeMatrixSize();
+        xy = Bikubik.inputXY();
+        mInv = (Bikubik.Matrix16x16()).Inverse();
+        m.Multiply(mInv);
+
+        for (j = 0; j < 4; j++) {
+            for (i = 0; i < 4; i++) {
+                fxy += m.ELMT(row, 0) * ((double) Math.pow(xy.data[0][0], i)) * ((double) Math.pow(xy.data[1][0], j));
+                row++;
+            }
+        }
+        System.out.printf("f(%.4f, %.4f) = %.4f\n",xy.data[0][0] , xy.data[1][0], fxy);
     }
 
     public static void RLB() {

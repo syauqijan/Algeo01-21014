@@ -439,6 +439,18 @@ public class Matrix {
         }
     }
 
+    public static void orderRow(Matrix m, int iRow, int iCol) {
+        // menukar baris idx jika m[idx][idx]=0 dengan baris lain dibawahnya yang elemennya tidak 0
+        int i = iRow+1;
+        while (i < m.row) {
+            if (m.data[i][iCol] != 0) {
+                m.swapRow(iRow, i);
+                break;
+            }
+            i++;
+        }
+    }
+
     // swap col matrix
     public void swapCol(int col1, int col2) {
         // KAMUS LOKAL
@@ -527,22 +539,6 @@ public class Matrix {
         }
 
         return (det/total);
-    }
-
-    public static Matrix multiplyMatrix(Matrix m1, Matrix m2) {
-        
-        int i, j, k;
-        
-        Matrix m = new Matrix(m1.row, m2.col);
-        for (i = 0; i < m1.row; i++) {
-            for (j = 0; j < m2.col; j++) {
-                m.data[i][j] = 0;
-                for (k = 0; k < m2.row; k++) {
-                    m.data[i][j] += m1.ELMT(i, k) * m2.ELMT(k, j);
-                }
-            }
-        }
-        return m;
     }
 
 /*
