@@ -1,17 +1,14 @@
 package Matrix;
 
 import java.util.Scanner;
-<<<<<<< HEAD
 import java.io.File; 
 import java.io.FileNotFoundException; 
-=======
 import java.io.BufferedReader;
 import java.io.File;  // Import the File class
 import java.io.FileNotFoundException;  // Import this class to handle errors
 import java.io.IOException;
 import java.io.InputStreamReader;
 
->>>>>>> 50c7aa506b54aecd08ee82e59b36dfbf2efe7b65
 
 public class Matrix {
     public int row, col;
@@ -527,11 +524,6 @@ public class Matrix {
         }
 
         return (det/total);
-    }
-
-    public static void main(String[] args) {
-        Matrix m = new Matrix(0, 0);
-        m.printDeterminanReduksi();
     }
 
 }
