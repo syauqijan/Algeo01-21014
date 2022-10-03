@@ -70,6 +70,7 @@ public class Matrix {
             }
         }
 
+    /* 
     // create identity matrix
     public void identityMatrix(int x) {
         this.row = x;
@@ -85,6 +86,8 @@ public class Matrix {
             }
         }
     }
+    */
+
 
     // create copy matrix
     public void copyMatrix (Matrix m) {
@@ -436,6 +439,18 @@ public class Matrix {
         }
     }
 
+    public static void orderRow(Matrix m, int iRow, int iCol) {
+        // menukar baris idx jika m[idx][idx]=0 dengan baris lain dibawahnya yang elemennya tidak 0
+        int i = iRow+1;
+        while (i < m.row) {
+            if (m.data[i][iCol] != 0) {
+                m.swapRow(iRow, i);
+                break;
+            }
+            i++;
+        }
+    }
+
     // swap col matrix
     public void swapCol(int col1, int col2) {
         // KAMUS LOKAL
@@ -600,4 +615,13 @@ public class Matrix {
             }
         }
     }
+/*
+    // tes inputfile
+    public static void main(String[] args) throws IOException {
+        Matrix m = new Matrix(0, 0);
+        m.loopInputFile();
+        m.printMatrix();
+    }
+*/
+
 }
