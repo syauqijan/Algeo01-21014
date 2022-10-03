@@ -79,7 +79,8 @@ public class Interpolasi {
         
         double hasilTaksir = 0;
         Matrix n = m;
-        GaussianElimination tes = new GaussianElimination(null, null);
+        // OBETInterpolasi.eliminasiGaussJordan(m);
+        GaussJordan tes = new GaussJordan(m.getCol(0), m.getCol(2));
         tes.solution();
         double[] result = solusiTunggal(n);
 

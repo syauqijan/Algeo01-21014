@@ -529,7 +529,6 @@ public class Matrix {
         return (det/total);
     }
 
-<<<<<<< HEAD
     public static Matrix multiplyMatrix(Matrix m1, Matrix m2) {
         
         int i, j, k;
@@ -555,6 +554,4 @@ public class Matrix {
     }
 */
 
-=======
->>>>>>> fdfdf0235bf8fd06437951ffa870cb547648b605
 }

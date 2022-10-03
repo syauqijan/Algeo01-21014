@@ -1,5 +1,7 @@
 package Algoritma;
 import java.util.Arrays;
+import java.util.Scanner;
+
 import Matrix.Matrix;
 
 
@@ -7,19 +9,16 @@ public class GaussJordan {
 
 
  Matrix m; 
- public GaussJordan(double A[][],double b[]) {
+ public GaussJordan(Matrix A, Matrix b) {
   
-  int row=A.length;
-  int col=A[0].length;
-  
-  m = new Matrix(row,col+1);
-  for(int i=0;i<row;i++) {
-   for(int j=0;j<col;j++) 
-        m.pELMT(A[i][j], i, j);    
+  m = new Matrix(A.row,A.col+1);
+  for(int i=0;i<A.row;i++) {
+   for(int j=0;j<A.col;j++) 
+        m.pELMT(A.data[i][j], i, j);    
   }
   
-  for(int i=0;i<row;i++) {   
-   m.pELMT(b[i], i, col);
+  for(int i=0;i<A.row;i++) {   
+   m.pELMT(b.data[i][0], i, A.col);
   } 
   m.printMatrix();    
  }
@@ -87,12 +86,45 @@ public class GaussJordan {
    return m.toString();
  }
 
+ public static Matrix inputTitik() {
+  // memasukkan input titik-titik (x,y) yang diketahui
 
+      int i, j;
+
+      System.out.print("Masukkan jumlah pasangan: ");
+      Scanner input = new Scanner(System.in);
+      int n = input.nextInt();
+      System.out.println("");
+      Matrix m = new Matrix(n,n);
+      System.out.println("Masukkan pasangan titik-titik: ");
+      for (i = 0; i < n; i++) {
+          for (j = 0; j < n; j++) {
+              m.data[i][j] = input.nextDouble();
+          }
+      }
+      return m; 
+  }
+
+  public static Matrix inputHasil(Matrix A) {
+    // memasukkan input titik-titik (x,y) yang diketahui
+
+        int i, j;
+
+        Matrix b = new Matrix(A.row, 1);
+        Scanner input = new Scanner(System.in);
+        System.out.println("Masukkan hasil: ");
+        for (i = 0; i < A.row; i++) {
+            for (j = 0; j < 1; j++) {
+                b.data[i][j] = input.nextDouble();
+            }
+        }
+        return b; 
+    }
 
  public static void main(String[] args) {
     
-    double A[][]= { {1,1,2},{2,-1,1},{1,2,3}};
-    double b[]= {4,2,7};
+  Matrix A = inputTitik();
+  Matrix b = inputHasil(A);
   GaussJordan gj = new GaussJordan(A,b);  
   double sol[] =gj.solution();
   System.out.println( "Solution of Equation" );
