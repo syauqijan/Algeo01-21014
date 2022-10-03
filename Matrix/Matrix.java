@@ -147,7 +147,7 @@ public class Matrix {
             nameFile = scn.readLine();
             while(!isFileExist(nameFile) || nameFile.equals("")) {
                 System.out.println("File tidak ditemukan.");
-                System.out.println("Masukkan nama file: ");
+                System.out.println("\nMasukkan nama file: ");
                 nameFile = scn.readLine();
             } this.InputFile(nameFile);
             } catch (IOException e) {

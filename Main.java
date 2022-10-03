@@ -275,35 +275,73 @@ public class Main {
     }
 
     public static void Interpolation() {
-        Matrix m;
+        do {
+            flag = false;
+            Menu.inputMenuType();
+            pilihan = input.nextLine();
+            switch (pilihan) {
+                case "1":
+                    InterpolationFinal(1);
+                    break;
+                case "2":
+                    InterpolationFinal(2);
+                    break;
+                case "0":
+                    start();
+                    break;
+                case "999":
+                    System.out.println("\nTerima kasih telah menggunakan program ini.");
+                    break;
+                default:
+                    System.out.println("Pilihan tidak tersedia. Silakan ulangi input.");
+                    flag = true;
+                    break;
+            }
+        } while (flag);
+        
+    }
+
+    public static void InterpolationFinal(int i) {
+        Matrix m = new Matrix(0,0);
         double x;
-        String fileName;
-
-        m = new Matrix(0, 0);
-        Menu.inputMenuType();
-        pilihan = input.nextLine();
-
-        switch (pilihan) {
-            case "1":
-                System.out.println("\nMasukkan nama file: ");
-                fileName = input.nextLine();
-                m.InputFile(fileName);
-                System.out.println("");
-                m.printMatrix();
-                break;
-            case "2":
-                System.out.println("\nInput matriks: ");
-                m = Interpolasi.inputTitik();
-                break;
-            default:
-                System.out.println("Pilihan tidak tersedia. Silakan ulangi input.");
-                flag = true;
-                break;
+        if (i == 1) {
+            m.loopInputFile();
+        } else {
+            m = Interpolasi.inputTitik();
         }
         System.out.println("");
         x = Interpolasi.inputX();
         m = Interpolasi.changedToPolinom(m);
-        Interpolasi.solveInterpolasi(m, x);
+        do {
+            flag = false;
+            Menu.outputMenuType();
+            pilihan = input.nextLine();
+            switch (pilihan) {
+                case "1":
+                    saveFile saver = new saveFile();
+                    saver.save();
+                    Interpolasi.solveInterpolasi(m, x);
+                    saver.closeFile();
+                    break;
+                case "2":
+                    System.out.println();
+                    Interpolasi.solveInterpolasi(m, x);
+                    break;
+                case "0":
+                    Interpolation();
+                    break;
+                case "999":
+                    System.out.println("\nTerima kasih telah menggunakan program ini.");
+                    break;
+                default:
+                    System.out.println("Pilihan tidak tersedia. Silakan ulangi input.");
+                    flag = true;
+                    break;
+            }
+        } while (flag);
+        if (pilihan != "999") {
+            exit();
+        }
     }
 
     public static void Bicubic() {
