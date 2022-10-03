@@ -91,15 +91,15 @@ public class GaussJordan {
 
       int i, j;
 
-      System.out.print("Masukkan jumlah baris matriks: ");
+      System.out.print("Masukkan jumlah baris matriks : ");
       Scanner input = new Scanner(System.in);
       int row = input.nextInt();
       System.out.println("");
-      System.out.print("Masukkan jumlah baris matriks: ");
+      System.out.print("Masukkan jumlah kolom matriks : ");
       int col = input.nextInt();
       System.out.println("");
       Matrix m = new Matrix(row,col);
-      System.out.println("Masukkan matriks: ");
+      System.out.println("Masukkan matriks : ");
       for (i = 0; i < row; i++) {
           for (j = 0; j < col; j++) {
               m.data[i][j] = input.nextDouble();
